@@ -1,0 +1,25 @@
+/* PENDIENTE: valores neutros de ejemplo. /empezar los cambia por los de tu marca y borra esta línea. */
+/* Colores y tipografías de TU marca. Todas las plantillas los usan.
+   /empezar rellena este archivo a partir de marca/guia_visual.md. Puedes editarlo a mano:
+   cambia los valores, no los nombres de las variables.
+
+   Fuentes:
+   - De Google Fonts: deja la línea @import con la URL de tu fuente (fonts.google.com → "Get embed code" → @import).
+   - Propias (.ttf/.otf/.woff2): guárdalas en marca/fuentes/ y usa @font-face con url("@marca/fuentes/archivo.ttf").
+     "@marca/" se sustituye solo por la ruta correcta al construir la pieza. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&display=block");
+
+:root {
+  --color-fondo: #FFFFFF;
+  --color-texto: #111111;
+  --color-acento: #111111;      /* palabras destacadas con [[doble corchete]], flechas, líneas */
+  --color-secundario: #F2F2F2;  /* cajas y fondos suaves */
+  --color-sobre-foto: #FFFFFF;  /* texto encima de fotos */
+
+  --fuente-titulos: "Inter", sans-serif;
+  --fuente-texto: "Inter", sans-serif;
+  --peso-titulos: 400;          /* 400 = regular: así la **negrita** destaca dentro del titular */
+
+  --margen: 80px;               /* margen lateral del texto (sobre 1080 px de ancho) */
+  --radio: 0px;                 /* esquinas redondeadas de cajas y fotos: 0 = rectas */
+}

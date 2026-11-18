@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Texto</title>
+<!-- Slide intermedia de un carrusel: un punto o una idea por slide. -->
+<script type="application/json" id="esquema">
+{
+  "descripcion": "Slide intermedia: una idea por slide, con número opcional y foto opcional arriba.",
+  "formatos": ["4:5", "3:4", "1:1", "9:16"],
+  "obligatorios": {"texto": "la idea, 60 palabras como mucho; **negrita** en lo que pesa"},
+  "opcionales": {
+    "titulo": "frase corta encima del texto", "numero": "número del punto (p. ej. 2)",
+    "foto": "foto en la mitad superior", "encuadre": "object-position CSS de la foto",
+    "tamano": "px del texto (por defecto 46)", "flecha": "true para la flecha de 'desliza'"
+  }
+}
+</script>
+<style>
+/*CSS*/
+.numero { font-family: var(--fuente-titulos); font-weight: var(--peso-titulos); font-size: 150px; line-height: 1; color: var(--color-acento); margin-bottom: 30px; }
+.titulo { font-size: 70px; margin-bottom: 36px; }
+.texto { font-size: 46px; line-height: 1.3; }
+.media { position: absolute; left: 0; right: 0; top: 0; height: 48%; overflow: hidden; border-radius: 0 0 var(--radio) var(--radio); }
+.con-foto .bloque { top: 54%; transform: none; }
+</style>
+</head>
+<body>
+<div class="slide" id="slide">
+  <div class="media" id="media"></div>
+  <div class="bloque centro" id="bloque">
+    <div class="numero" id="numero"></div>
+    <div class="titulo" id="titulo"></div>
+    <div class="texto" id="texto"></div>
+  </div>
+  <div class="flecha-esquina" id="flecha"></div>
+</div>
+<script>
+/*JS*/
+const DATOS = /*DATOS*/{};
+if (DATOS.foto) {
+  poner("#media", imagen(DATOS.foto, "foto", `object-position:${DATOS.encuadre || "50% 50%"}`));
+  $("#slide").classList.add("con-foto");
+} else { quitar("#media"); }
+DATOS.numero != null ? poner("#numero", esc(DATOS.numero)) : quitar("#numero");
+DATOS.titulo ? poner("#titulo", md(DATOS.titulo)) : quitar("#titulo");
+poner("#texto", md(DATOS.texto));
+if (DATOS.tamano) $("#texto").style.fontSize = DATOS.tamano + "px";
+DATOS.flecha ? poner("#flecha", `<div class="flecha">${FLECHA_SVG}</div>`) : quitar("#flecha");
+listo();
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+/* Estructura común de todas las plantillas. Los colores y fuentes NO van aquí: van en _marca.css.
+   tools/construir_visual.py inyecta _marca.css + este archivo en cada plantilla. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: var(--w); height: var(--h); overflow: hidden;
+  background: var(--color-fondo); color: var(--color-texto);
+  font-family: var(--fuente-texto); -webkit-font-smoothing: antialiased;
+}
+b, strong { font-weight: 700; }
+em { font-style: italic; }
+.slide { position: relative; width: var(--w); height: var(--h); overflow: hidden; background: var(--color-fondo); }
+.titulo { font-family: var(--fuente-titulos); font-weight: var(--peso-titulos); line-height: 1.05; letter-spacing: -0.02em; }
+.acento { color: var(--color-acento); }
+
+/* Foto a sangre y velo para leer texto encima */
+.foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.velo { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,var(--velo, .65)) 0%, rgba(0,0,0,0) 65%); }
+.sobre-foto { color: var(--color-sobre-foto); }
+.sobre-foto .acento { color: var(--color-sobre-foto); text-decoration: underline; text-decoration-color: var(--color-acento);
+  text-decoration-thickness: .08em; text-underline-offset: .12em; text-decoration-skip-ink: none; }
+
+/* Bloque de texto con margen de marca */
+.bloque { position: absolute; left: var(--margen); right: var(--margen); }
+.abajo { bottom: calc(var(--margen) + 20px); }
+.arriba { top: calc(var(--margen) + 20px); }
+.centro { top: 50%; transform: translateY(-50%); }
+.centrado { text-align: center; }
+
+/* Etiqueta pequeña (kicker) y pie */
+.etiqueta { font-size: 30px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; margin-bottom: 28px; color: var(--color-acento); }
+.sobre-foto .etiqueta { color: var(--color-sobre-foto); }
+.pie { position: absolute; left: var(--margen); right: var(--margen); bottom: var(--margen); display: flex; justify-content: space-between; align-items: center; font-size: 28px; }
+
+/* Logo */
+.logo { height: 56px; width: auto; display: block; }
+.logo-esquina { position: absolute; top: var(--margen); left: var(--margen); }
+
+/* Flecha de "desliza" */
+.flecha { width: 96px; height: 96px; border-radius: 50%; background: var(--color-acento); display: flex; align-items: center; justify-content: center; }
+.flecha svg { width: 50px; height: 50px; stroke: var(--color-fondo); }
+.flecha-esquina { position: absolute; right: var(--margen); bottom: var(--margen); }
+
+/* Marca roja visible de [A CONFIRMAR] (solo en bocetos con --permitir-pendientes) */
+.pendiente { color: #E5484D !important; background: #FFF0F0; }

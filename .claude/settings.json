@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 tools/estado.py)",
+      "Bash(.venv/bin/python3 tools/estado.py)",
+      "Bash(.venv/bin/python3 tools/construir_visual.py:*)",
+      "Bash(.venv/bin/python3 tools/analizar_web.py:*)",
+      "Bash(.venv/bin/python3 tools/utm.py:*)",
+      "Bash(.venv/bin/python3 tools/historial.py:*)",
+      "Bash(.venv/bin/python3 tools/programar.py --cuentas)",
+      "Bash(.venv/bin/python3 tools/calendario.py --ver)",
+      "Bash(.venv/bin/python3 tools/comparar_referencias.py:*)"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+# Claves
+.env
+
+# Entorno de Python
+.venv/
+__pycache__/
+*.pyc
+
+# Archivos generados (se regeneran)
+posts/*/visual/build/
+.tmp/
+
+# Sistema
+.DS_Store
+
+# Sesión de Hootsuite (tools/hootsuite_login.py)
+.hootsuite_token.json

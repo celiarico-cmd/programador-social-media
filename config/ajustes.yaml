@@ -1,0 +1,64 @@
+# Ajustes del sistema. /empezar los rellena contigo; también puedes editarlos a mano.
+# Las claves secretas NO van aquí: van en el archivo .env (ver .env.ejemplo).
+
+marca:
+  nombre: ""                  # p. ej. "Panadería Russafa"
+  idioma: es                  # idioma por defecto de los posts
+  zona_horaria: Europe/Madrid # para programar a la hora correcta
+
+# Redes en las que publicas: linkedin, instagram, facebook, x, tiktok, threads, bluesky, pinterest, youtube
+redes: []
+
+programador:
+  nombre: ""                  # metricool | hootsuite | zernio | buffer | postiz
+  via: ""                     # mcp | api   (ver workflows/programadores/<nombre>.md)
+  # Solo para algunos programadores, los rellena /empezar:
+  metricool_brand_id: ""
+  postiz_url: ""              # solo si tienes Postiz instalado en tu servidor; vacío = Postiz en la nube
+
+imagenes:
+  # Dónde se suben las imágenes para que el programador pueda descargarlas:
+  #   programador = el propio programador las recibe (Zernio y Postiz por API, Hootsuite por MCP)
+  #   cloudinary | r2 | imagekit = servicio aparte (hace falta para Metricool, Buffer y Zernio/Postiz por MCP)
+  proveedor: ""
+  carpeta: redes              # carpeta dentro del servicio
+
+utm:
+  medium: social
+  dominios: []                # solo se marcan enlaces de estos dominios (p. ej. [mimarca.com]); vacío = todos
+  campanas: []                # campañas o secciones habituales (utm_campaign), p. ej. [consejos, lanzamientos, eventos]
+
+calendario:
+  # Dónde llevas el calendario de contenidos (opcional): notion | sheets | airtable  (con script)
+  #                                                    trello | asana | clickup | monday  (por MCP desde el chat)
+  # Vacío = no se usa calendario.
+  herramienta: ""
+  estado_inicial: ""          # valor de la columna de estado al crear la entrada, p. ej. "Programado"
+  columnas:                   # nombre EXACTO de cada columna en tu calendario (míralas con: tools/calendario.py --ver)
+    titulo: ""
+    fecha: ""
+    redes: ""
+    estado: ""
+    enlace: ""
+    copy: ""
+    imagenes: ""
+  notion:
+    base_id: ""
+  airtable:
+    base_id: ""               # empieza por "app…"
+    tabla: ""
+  sheets:
+    hoja_id: ""               # el código largo de la URL de la hoja
+    pestana: Calendario
+  # Para trello/asana/clickup/monday: dónde crear la tarjeta (tablero, proyecto, lista…), en texto libre
+  destino: ""
+
+avisos:
+  slack_canal: ""             # opcional: canal de Slack donde avisar de cada post programado (por MCP)
+
+diseno:
+  # Dónde se hacen las imágenes de los posts:
+  #   chat   = plantillas HTML de este repo (por defecto)
+  #   canva  = rellenar tus plantillas de Canva o descargar lo que diseñes allí (MCP de Canva)
+  #   figma  = rellenar tus frames de Figma o descargar lo que diseñes allí (MCP o API de Figma, plan de pago)
+  modo: chat

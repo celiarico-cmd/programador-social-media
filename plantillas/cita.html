@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cita</title>
+<!-- Testimonio o frase de una persona real, con su foto y su nombre. -->
+<script type="application/json" id="esquema">
+{
+  "descripcion": "Cita literal de una persona real, con nombre y cargo. Con foto, a sangre con velo; sin foto, sobre el color de fondo.",
+  "formatos": ["4:5", "3:4", "1:1", "9:16"],
+  "obligatorios": {"cita": "frase LITERAL de la persona (nunca inventada ni retocada sin su OK)", "nombre": "nombre y apellido"},
+  "opcionales": {
+    "cargo": "cargo y empresa, o lo que la presenta", "foto": "foto de la persona", "encuadre": "object-position CSS",
+    "velo": "0-1 (por defecto 0.7)", "tamano": "px de la cita (por defecto 72)", "flecha": "true para la flecha de 'desliza'"
+  }
+}
+</script>
+<style>
+/*CSS*/
+.comillas { font-family: var(--fuente-titulos); font-size: 220px; line-height: .6; height: 90px; color: var(--color-acento); }
+.sobre-foto .comillas { color: var(--color-sobre-foto); }
+.cita { font-family: var(--fuente-titulos); font-size: 72px; line-height: 1.12; letter-spacing: -0.01em; }
+.firma { margin-top: 44px; font-size: 34px; line-height: 1.35; }
+.firma b { display: block; }
+</style>
+</head>
+<body>
+<div class="slide" id="slide">
+  <div id="foto"></div>
+  <div class="velo" id="velo"></div>
+  <div class="bloque abajo" id="bloque">
+    <div class="comillas">“</div>
+    <div class="cita" id="cita"></div>
+    <div class="firma" id="firma"></div>
+  </div>
+  <div class="flecha-esquina" id="flecha"></div>
+</div>
+<script>
+/*JS*/
+const DATOS = /*DATOS*/{};
+if (DATOS.foto) {
+  poner("#foto", imagen(DATOS.foto, "foto", `object-position:${DATOS.encuadre || "50% 30%"}`));
+  $("#velo").style.setProperty("--velo", DATOS.velo ?? 0.7);
+  $("#slide").classList.add("sobre-foto");
+} else { quitar("#velo"); $("#bloque").classList.replace("abajo", "centro"); }
+poner("#cita", md(DATOS.cita));
+if (DATOS.tamano) $("#cita").style.fontSize = DATOS.tamano + "px";
+poner("#firma", `<b>${esc(DATOS.nombre)}</b>${DATOS.cargo ? esc(DATOS.cargo) : ""}`);
+if (DATOS.flecha) { poner("#flecha", `<div class="flecha">${FLECHA_SVG}</div>`); $("#bloque").style.right = "calc(var(--margen) + 130px)"; }
+else quitar("#flecha");
+listo();
+</script>
+</body>
+</html>

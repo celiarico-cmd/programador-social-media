@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cierre</title>
+<!-- Última slide de un carrusel: la conclusión o la llamada a la acción, con el logo. -->
+<script type="application/json" id="esquema">
+{
+  "descripcion": "Última slide del carrusel: conclusión o llamada a la acción, con logo. Nunca una URL dentro de la imagen.",
+  "formatos": ["4:5", "3:4", "1:1", "9:16"],
+  "obligatorios": {"texto": "conclusión o CTA, 2-3 líneas; **negrita** en la acción"},
+  "opcionales": {
+    "pregunta": "pregunta corta para invitar a comentar, debajo del texto",
+    "fondo": "acento (por defecto) | marca", "logo": "false para quitar el logo (por defecto sale si hay logo en marca/logos/)",
+    "tamano": "px del texto (por defecto 88)"
+  }
+}
+</script>
+<style>
+/*CSS*/
+.titulo { font-size: 88px; }
+.pregunta { font-size: 40px; line-height: 1.3; margin-top: 48px; opacity: .85; }
+.invertido { background: var(--color-acento); color: var(--color-fondo); }
+.invertido .acento { color: var(--color-fondo); text-decoration: underline; text-decoration-thickness: .07em; text-underline-offset: .12em; }
+.logo-pie { position: absolute; left: var(--margen); bottom: var(--margen); }
+.invertido .logo { filter: none; }
+</style>
+</head>
+<body>
+<div class="slide" id="slide">
+  <div class="bloque centro" id="bloque">
+    <div class="titulo" id="texto"></div>
+    <div class="pregunta" id="pregunta"></div>
+  </div>
+  <div class="logo-pie" id="logo"></div>
+</div>
+<script>
+/*JS*/
+const DATOS = /*DATOS*/{};
+if ((DATOS.fondo || "acento") === "acento") $("#slide").classList.add("invertido");
+poner("#texto", md(DATOS.texto));
+if (DATOS.tamano) $("#texto").style.fontSize = DATOS.tamano + "px";
+DATOS.pregunta ? poner("#pregunta", md(DATOS.pregunta)) : quitar("#pregunta");
+DATOS.logo !== false && DATOS._logo ? poner("#logo", imagen(DATOS._logo, "logo")) : quitar("#logo");
+listo();
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Portada</title>
+<!-- Primera slide de un carrusel o imagen única: titular grande, con o sin foto de fondo. -->
+<script type="application/json" id="esquema">
+{
+  "descripcion": "Portada de carrusel o post de imagen única. Titular grande; con foto, el texto va en blanco sobre un velo.",
+  "formatos": ["4:5", "3:4", "1:1", "9:16"],
+  "obligatorios": {"titulo": "titular, 2-3 líneas como mucho; **negrita** o [[acento]] en la idea clave"},
+  "opcionales": {
+    "foto": "foto de fondo (ruta relativa al spec)", "encuadre": "object-position CSS de la foto, p. ej. '50% 30%'",
+    "velo": "0-1, oscuridad del degradado sobre la foto (por defecto 0.65)",
+    "etiqueta": "texto pequeño sobre el titular (tema, serie)", "posicion": "abajo (por defecto) | centro | arriba",
+    "tamano": "px del titular (por defecto 104)", "logo": "true para el logo arriba a la izquierda",
+    "flecha": "true (por defecto) para la flecha de 'desliza'; false en posts de una sola imagen"
+  }
+}
+</script>
+<style>
+/*CSS*/
+.titulo { font-size: 104px; }
+</style>
+</head>
+<body>
+<div class="slide" id="slide">
+  <div id="foto"></div>
+  <div class="velo" id="velo"></div>
+  <div class="logo-esquina" id="logo"></div>
+  <div class="bloque" id="bloque">
+    <div class="etiqueta" id="etiqueta"></div>
+    <div class="titulo" id="titulo"></div>
+  </div>
+  <div class="flecha-esquina" id="flecha"></div>
+</div>
+<script>
+/*JS*/
+const DATOS = /*DATOS*/{};
+const conFoto = !!DATOS.foto;
+if (conFoto) {
+  poner("#foto", imagen(DATOS.foto, "foto", `object-position:${DATOS.encuadre || "50% 50%"}`));
+  $("#velo").style.setProperty("--velo", DATOS.velo ?? 0.65);
+  $("#slide").classList.add("sobre-foto");
+} else { quitar("#velo"); }
+$("#bloque").classList.add(DATOS.posicion || "abajo");
+if (DATOS.posicion === "centro") $("#bloque").classList.add("centrado");
+poner("#titulo", md(DATOS.titulo));
+if (DATOS.tamano) $("#titulo").style.fontSize = DATOS.tamano + "px";
+DATOS.etiqueta ? poner("#etiqueta", md(DATOS.etiqueta)) : quitar("#etiqueta");
+DATOS.logo && DATOS._logo ? poner("#logo", imagen(DATOS._logo, "logo")) : quitar("#logo");
+DATOS.flecha === false ? quitar("#flecha") : poner("#flecha", `<div class="flecha">${FLECHA_SVG}</div>`);
+if (DATOS.flecha !== false && (DATOS.posicion || "abajo") === "abajo") $("#bloque").style.right = "calc(var(--margen) + 130px)";
+listo();
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Frase</title>
+<!-- Una sola frase grande. Para opiniones, datos, anuncios cortos. -->
+<script type="application/json" id="esquema">
+{
+  "descripcion": "Una frase grande que se lee de un vistazo, sobre el color de fondo, el color de acento o una foto.",
+  "formatos": ["4:5", "3:4", "1:1", "9:16"],
+  "obligatorios": {"frase": "frase principal, 12 palabras como mucho; **negrita** o [[acento]] en lo que pesa"},
+  "opcionales": {
+    "fondo": "marca (por defecto) | acento (fondo del color de acento, texto en el de fondo)",
+    "foto": "foto de fondo", "encuadre": "object-position CSS", "velo": "0-1 (por defecto 0.6)",
+    "subtexto": "línea pequeña bajo la frase", "posicion": "centro (por defecto) | abajo | arriba",
+    "alineacion": "izquierda (por defecto) | centro", "tamano": "px de la frase (por defecto 112)", "logo": "true para el logo abajo"
+  }
+}
+</script>
+<style>
+/*CSS*/
+.titulo { font-size: 112px; }
+.subtexto { font-size: 38px; line-height: 1.3; margin-top: 40px; max-width: 880px; }
+.centrado .subtexto { margin-left: auto; margin-right: auto; }
+.invertido { background: var(--color-acento); color: var(--color-fondo); }
+.invertido .acento { color: var(--color-fondo); text-decoration: underline; text-decoration-thickness: .07em; text-underline-offset: .12em; }
+.logo-pie { position: absolute; left: var(--margen); bottom: var(--margen); }
+</style>
+</head>
+<body>
+<div class="slide" id="slide">
+  <div id="foto"></div>
+  <div class="velo" id="velo"></div>
+  <div class="bloque" id="bloque">
+    <div class="titulo" id="frase"></div>
+    <div class="subtexto" id="subtexto"></div>
+  </div>
+  <div class="logo-pie" id="logo"></div>
+</div>
+<script>
+/*JS*/
+const DATOS = /*DATOS*/{};
+if (DATOS.foto) {
+  poner("#foto", imagen(DATOS.foto, "foto", `object-position:${DATOS.encuadre || "50% 50%"}`));
+  $("#velo").style.setProperty("--velo", DATOS.velo ?? 0.6);
+  $("#slide").classList.add("sobre-foto");
+} else {
+  quitar("#velo");
+  if (DATOS.fondo === "acento") $("#slide").classList.add("invertido");
+}
+$("#bloque").classList.add(DATOS.posicion || "centro");
+if (DATOS.alineacion === "centro") $("#bloque").classList.add("centrado");
+poner("#frase", md(DATOS.frase));
+if (DATOS.tamano) $("#frase").style.fontSize = DATOS.tamano + "px";
+DATOS.subtexto ? poner("#subtexto", md(DATOS.subtexto)) : quitar("#subtexto");
+DATOS.logo && DATOS._logo ? poner("#logo", imagen(DATOS._logo, "logo")) : quitar("#logo");
+listo();
+</script>
+</body>
+</html>
